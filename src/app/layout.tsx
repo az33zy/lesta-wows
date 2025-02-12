@@ -21,8 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={`${robotoCondensed.variable} antialiased`}>
+    <html lang="ru" className="h-full">
+      <body
+        className={`${robotoCondensed.variable} antialiased min-h-full flex flex-col`}
+      >
         <Header />
         {children}
         <Footer />

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: rgb(1, 10, 25);
+  --background: 1, 10, 25;
   --foreground: #fff;
   --foreground-muted: #80848c;
   --accent: rgba(255, 255, 255, 0.125);
@@ -13,6 +13,6 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: rgb(var(--background));
   font-family: var(--font-roboto-condensed), Arial, Helvetica, sans-serif;
 }

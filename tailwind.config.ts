@@ -15,7 +15,7 @@ export default {
     },
     extend: {
       colors: {
-        background: "var(--background)",
+        background: "rgba(var(--background), <alpha-value>)",
         foreground: {
           DEFAULT: "var(--foreground)",
           muted: "var(--foreground-muted)",

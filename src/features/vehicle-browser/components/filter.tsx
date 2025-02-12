@@ -39,7 +39,7 @@ export function Filter<T extends FilterOption>({
     <>
       <NavigationMenuTrigger>{label}</NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="w-[300px] pt-1 pb-1.5">
+        <ul className="w-[278px] pt-1 pb-1.5">
           {options.map((option) => (
             <li key={option.name}>
               <label className="flex items-center gap-2 cursor-pointer px-2 py-0.5 hover:bg-white/10 transition-colors">

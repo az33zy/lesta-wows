@@ -17,6 +17,8 @@ type VehicleBrowserContextType = {
   setFiltersType: (values: string[]) => void;
   setFiltersLevel: (values: string[]) => void;
 
+  resetFilters: () => void;
+
   filteredVehicles: Vehicle[];
 };
 
@@ -47,6 +49,12 @@ export function VehicleBrowserProvider({
     [vehicles, filtersNation, filtersType, filtersLevel],
   );
 
+  const resetFilters = () => {
+    setFiltersLevel([]);
+    setFiltersNation([]);
+    setFiltersType([]);
+  };
+
   return (
     <VehicleBrowserContext.Provider
       value={{
@@ -61,6 +69,8 @@ export function VehicleBrowserProvider({
         setFiltersNation,
         setFiltersType,
         setFiltersLevel,
+
+        resetFilters,
 
         filteredVehicles,
       }}

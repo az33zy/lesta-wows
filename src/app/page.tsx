@@ -5,11 +5,11 @@ export default async function Home() {
   const vehicles = await getVehicles();
 
   return (
-    <main>
-      <div className="container">
-        <h1 className="text-4xl font-medium uppercase mb-8">Корабли</h1>
-        <VehicleBrowser vehicles={vehicles} />
-      </div>
+    <main className="flex-1">
+      <h1 className="text-4xl font-medium uppercase mb-4">
+        <div className="container">Корабли</div>
+      </h1>
+      <VehicleBrowser vehicles={vehicles} />
     </main>
   );
 }

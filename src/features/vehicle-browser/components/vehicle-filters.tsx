@@ -6,6 +6,7 @@ import {
   NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuList,
+  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Filter } from "./filter";
 import { useVehicleBrowser } from "../contexts/vehicle-browser-context";
@@ -19,10 +20,11 @@ export function VehicleFilters() {
     setFiltersNation,
     filtersType,
     setFiltersType,
+    resetFilters,
   } = useVehicleBrowser();
 
   return (
-    <NavigationMenu className="mb-4">
+    <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <Filter
@@ -43,7 +45,7 @@ export function VehicleFilters() {
             renderOption={(option) => (
               <>
                 <Image src={option.icon} alt="" width={27} height={16} />
-                {option.title}
+                <span style={{ color: option.color }}>{option.title}</span>
               </>
             )}
           />
@@ -63,6 +65,17 @@ export function VehicleFilters() {
             )}
           />
         </NavigationMenuItem>
+
+        {filtersLevel.length || filtersNation.length || filtersType.length ? (
+          <NavigationMenuItem>
+            <button
+              className={navigationMenuTriggerStyle()}
+              onClick={resetFilters}
+            >
+              Сбросить
+            </button>
+          </NavigationMenuItem>
+        ) : null}
 
         <NavigationMenuIndicator />
       </NavigationMenuList>
