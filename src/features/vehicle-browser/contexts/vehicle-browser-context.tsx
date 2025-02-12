@@ -1,13 +1,22 @@
 "use client";
 
-import { createContext, use, useState } from "react";
+import { createContext, use, useMemo, useState } from "react";
 import type { Vehicle } from "@/types/api";
+import { extractFilterItems, filterVehicles } from "../utils/filters";
 
 type VehicleBrowserContextType = {
   vehicles: Vehicle[];
+
+  filterOptions: ReturnType<typeof extractFilterItems>;
+
   filtersNation: string[];
   filtersType: string[];
   filtersLevel: number[];
+
+  setFiltersNation: (values: string[]) => void;
+  setFiltersType: (values: string[]) => void;
+  setFiltersLevel: (values: number[]) => void;
+
   filteredVehicles: Vehicle[];
 };
 
@@ -22,17 +31,36 @@ export function VehicleBrowserProvider({
   vehicles: Vehicle[];
   children: React.ReactNode;
 }) {
-  // const filteredVehicles = vehicles.filter((v) => v.level === 5);
-  const filteredVehicles = vehicles.filter((v) => true);
+  const [filtersNation, setFiltersNation] = useState<string[]>([]);
+  const [filtersType, setFiltersType] = useState<string[]>([]);
+  const [filtersLevel, setFiltersLevel] = useState<number[]>([]);
+
+  const filterOptions = useMemo(() => extractFilterItems(vehicles), [vehicles]);
+
+  const filteredVehicles = useMemo(
+    () =>
+      filterVehicles(vehicles, {
+        nations: filtersNation,
+        types: filtersType,
+        levels: filtersLevel,
+      }),
+    [vehicles, filtersNation, filtersType, filtersLevel],
+  );
 
   return (
     <VehicleBrowserContext.Provider
       value={{
         vehicles,
 
-        filtersNation: [],
-        filtersType: [],
-        filtersLevel: [],
+        filterOptions,
+
+        filtersNation,
+        filtersType,
+        filtersLevel,
+
+        setFiltersNation,
+        setFiltersType,
+        setFiltersLevel,
 
         filteredVehicles,
       }}
