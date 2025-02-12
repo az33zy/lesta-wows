@@ -38,6 +38,7 @@ export function VehicleGrid() {
       useWindowScroll
       components={gridComponents}
       itemContent={(_, data) => <VehicleCard vehicle={data} />}
+      computeItemKey={(_, data) => data.id}
     />
   );
 }
