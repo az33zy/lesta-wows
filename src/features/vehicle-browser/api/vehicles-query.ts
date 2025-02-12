@@ -27,7 +27,6 @@ function dtoToVehicle(dto: VehicleDto): Vehicle {
     level: {
       name: levelString,
       title: `${romanize(dto.level)}`,
-      value: dto.level,
     },
     nation: {
       name: dto.nation.name,

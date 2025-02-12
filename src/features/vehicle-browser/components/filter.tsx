@@ -12,21 +12,21 @@ type FilterOption = {
   icon?: string;
 };
 
-type FilterProps = {
+type FilterProps<T extends FilterOption> = {
   label: string;
-  options: FilterOption[];
+  options: T[];
   selectedValues: string[];
   onChange: (values: string[]) => void;
-  renderOption?: (option: FilterOption) => React.ReactNode;
+  renderOption?: (option: T) => React.ReactNode;
 };
 
-export function Filter({
+export function Filter<T extends FilterOption>({
   label,
   options,
   selectedValues,
   onChange,
   renderOption,
-}: FilterProps) {
+}: FilterProps<T>) {
   const handleCheckboxChange = (value: string, checked: string | boolean) => {
     if (checked) {
       onChange([...selectedValues, value]);
@@ -39,7 +39,7 @@ export function Filter({
     <>
       <NavigationMenuTrigger>{label}</NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="w-[300px] py-1">
+        <ul className="w-[300px] pt-1 pb-1.5">
           {options.map((option) => (
             <li key={option.name}>
               <label className="flex items-center gap-2 cursor-pointer px-2 py-0.5 hover:bg-white/10 transition-colors">
