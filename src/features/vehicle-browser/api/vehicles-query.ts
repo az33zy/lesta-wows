@@ -1,4 +1,4 @@
-import { Vehicle, VehicleDto } from "@/types/api";
+import type { Vehicle, VehicleDto } from "@/types/api";
 import { romanize } from "@/utils/romanize";
 
 const url = "https://vortex.korabli.su/api/graphql/glossary/";

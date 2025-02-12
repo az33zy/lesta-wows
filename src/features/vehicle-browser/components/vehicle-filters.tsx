@@ -2,6 +2,14 @@
 
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import type { Level, Nation, Type } from "@/types/api";
 import { useVehicleBrowser } from "../contexts/vehicle-browser-context";
 
@@ -17,25 +25,27 @@ function FilterLevel({ levels }: { levels: Level[] }) {
   };
 
   return (
-    <div>
-      <div className="text-lg font-medium mb-2">Уровень</div>
-      <ul>
-        {levels.map((level) => (
-          <li key={level.name}>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <Checkbox
-                checked={filtersLevel.includes(level.value)}
-                onCheckedChange={(checked) =>
-                  handleCheckboxChange(level.value, checked)
-                }
-                id={`level-${level.name}`}
-              />
-              {level.title}
-            </label>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <NavigationMenuTrigger>Уровень</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <ul className="w-[200px]">
+          {levels.map((level) => (
+            <li key={level.name}>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <Checkbox
+                  checked={filtersLevel.includes(level.value)}
+                  onCheckedChange={(checked) =>
+                    handleCheckboxChange(level.value, checked)
+                  }
+                  id={`level-${level.name}`}
+                />
+                Уровень {level.title}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </NavigationMenuContent>
+    </>
   );
 }
 
@@ -51,26 +61,28 @@ function FilterNation({ nations }: { nations: Nation[] }) {
   };
 
   return (
-    <div>
-      <div className="text-lg font-medium mb-2">Нация</div>
-      <ul>
-        {nations.map((nation) => (
-          <li key={nation.name}>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <Checkbox
-                checked={filtersNation.includes(nation.name)}
-                onCheckedChange={(checked) =>
-                  handleCheckboxChange(nation.name, checked)
-                }
-                id={`nation-${nation.name}`}
-              />
-              <Image src={nation.icon} alt="" width={27} height={16} />
-              {nation.title}
-            </label>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <NavigationMenuTrigger>Нация</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <ul className="w-[200px]">
+          {nations.map((nation) => (
+            <li key={nation.name}>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <Checkbox
+                  checked={filtersNation.includes(nation.name)}
+                  onCheckedChange={(checked) =>
+                    handleCheckboxChange(nation.name, checked)
+                  }
+                  id={`nation-${nation.name}`}
+                />
+                <Image src={nation.icon} alt="" width={27} height={16} />
+                {nation.title}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </NavigationMenuContent>
+    </>
   );
 }
 
@@ -85,26 +97,28 @@ function FilterType({ types }: { types: Type[] }) {
     }
   };
   return (
-    <div>
-      <div className="text-lg font-medium mb-2">Класс</div>
-      <ul>
-        {types.map((type) => (
-          <li key={type.name}>
-            <label className="flex items-center gap-1 cursor-pointer">
-              <Checkbox
-                checked={filtersType.includes(type.name)}
-                onCheckedChange={(checked) =>
-                  handleCheckboxChange(type.name, checked)
-                }
-                id={`type-${type.name}`}
-              />
-              <Image src={type.icon} alt="" width={27} height={27} />
-              {type.title}
-            </label>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <NavigationMenuTrigger>Класс</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <ul className="w-[200px]">
+          {types.map((type) => (
+            <li key={type.name}>
+              <label className="flex items-center gap-1 cursor-pointer">
+                <Checkbox
+                  checked={filtersType.includes(type.name)}
+                  onCheckedChange={(checked) =>
+                    handleCheckboxChange(type.name, checked)
+                  }
+                  id={`type-${type.name}`}
+                />
+                <Image src={type.icon} alt="" width={27} height={27} />
+                {type.title}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </NavigationMenuContent>
+    </>
   );
 }
 
@@ -112,10 +126,22 @@ export function VehicleFilters() {
   const { filterOptions } = useVehicleBrowser();
 
   return (
-    <div className="grid sm:grid-cols-3 mb-8">
-      <FilterLevel levels={filterOptions.levels} />
-      <FilterNation nations={filterOptions.nations} />
-      <FilterType types={filterOptions.types} />
-    </div>
+    <NavigationMenu className="mb-4">
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <FilterLevel levels={filterOptions.levels} />
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <FilterNation nations={filterOptions.nations} />
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <FilterType types={filterOptions.types} />
+        </NavigationMenuItem>
+
+        <NavigationMenuIndicator />
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }

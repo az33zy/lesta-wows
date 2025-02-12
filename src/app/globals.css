@@ -6,6 +6,9 @@
   --background: rgb(1, 10, 25);
   --foreground: #fff;
   --foreground-muted: #80848c;
+  --accent: rgba(255, 255, 255, 0.125);
+  --accent-foreground: rgba(255, 255, 255, 1);
+  --popover: #000;
 }
 
 body {

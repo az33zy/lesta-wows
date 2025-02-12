@@ -20,6 +20,13 @@ export default {
           DEFAULT: "var(--foreground)",
           muted: "var(--foreground-muted)",
         },
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
+        popover: {
+          DEFAULT: "var(--popover)",
+        },
       },
     },
   },
