@@ -1,10 +1,46 @@
+import { api } from "@/lib/api-client";
 import type { Vehicle, VehicleDto } from "@/types/api";
 import { romanize } from "@/utils/romanize";
 
 const url = "https://vortex.korabli.su/api/graphql/glossary/";
 
+const vehiclesQuery = `
+query Vehicles($languageCode: String = "ru") {
+  vehicles(lang: $languageCode) {
+    id # added for using as a key in the list
+    title
+    description
+    icons {
+      large
+      medium
+    }
+    level
+    type {
+      name
+      title
+      icons {
+        default
+      }
+    }
+    nation {
+      name
+      title
+      color
+      icons {
+        small
+        medium
+        large
+      }
+    }
+  }
+}
+`;
+
 export async function getVehicles() {
-  const { data } = (await import("./data.json")).default;
+  const { data } = await api.query<{ data: { vehicles: VehicleDto[] } }>(
+    url,
+    vehiclesQuery,
+  );
 
   return data.vehicles.map(dtoToVehicle);
 }
