@@ -47,7 +47,6 @@ export type Type = {
 export type Level = {
   name: string;
   title: string;
-  value: number;
 };
 
 export type Vehicle = {

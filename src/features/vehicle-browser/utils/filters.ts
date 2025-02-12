@@ -22,7 +22,7 @@ export function extractFilterItems(vehicles: Vehicle[]) {
   return {
     nations: Array.from(nations.values()),
     types: Array.from(types.values()),
-    levels: Array.from(levels.values()).toSorted((a, b) => a.value - b.value),
+    levels: Array.from(levels.values()).toSorted((a, b) => +a.name - +b.name),
   };
 }
 
@@ -31,7 +31,7 @@ export function filterVehicles(
   filters: {
     nations: string[];
     types: string[];
-    levels: number[];
+    levels: string[];
   },
 ) {
   const nationSet = new Set(filters.nations);
@@ -42,6 +42,6 @@ export function filterVehicles(
     (v) =>
       (nationSet.size === 0 || nationSet.has(v.nation.name)) &&
       (typeSet.size === 0 || typeSet.has(v.type.name)) &&
-      (levelSet.size === 0 || levelSet.has(v.level.value)),
+      (levelSet.size === 0 || levelSet.has(v.level.name)),
   );
 }

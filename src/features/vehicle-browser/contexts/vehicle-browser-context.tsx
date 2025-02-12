@@ -11,11 +11,11 @@ type VehicleBrowserContextType = {
 
   filtersNation: string[];
   filtersType: string[];
-  filtersLevel: number[];
+  filtersLevel: string[];
 
   setFiltersNation: (values: string[]) => void;
   setFiltersType: (values: string[]) => void;
-  setFiltersLevel: (values: number[]) => void;
+  setFiltersLevel: (values: string[]) => void;
 
   filteredVehicles: Vehicle[];
 };
@@ -33,7 +33,7 @@ export function VehicleBrowserProvider({
 }) {
   const [filtersNation, setFiltersNation] = useState<string[]>([]);
   const [filtersType, setFiltersType] = useState<string[]>([]);
-  const [filtersLevel, setFiltersLevel] = useState<number[]>([]);
+  const [filtersLevel, setFiltersLevel] = useState<string[]>([]);
 
   const filterOptions = useMemo(() => extractFilterItems(vehicles), [vehicles]);
 
