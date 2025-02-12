@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Мир Кораблей
 
-## Getting Started
+Данный проект представляет из себя выполненное [тестовое задание](https://gist.github.com/nonamenix/fc7609de3ebe2642db6324bc962295b2) для Lesta Games на позицию Frontend Developer.
 
-First, run the development server:
+[LIVE DEMO](https://wows.zy.ke/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+> **Предыстория:** К нам обратились паблишеры с запросом, они хотят показать нашим игрокам всё обилие кораблей в игре. Так совпало, что мы можем выделить ваше время на помощь, однако дизайнер сейчас загружен и вам придётся реализовать стену кораблей самому.
+>
+> **Задача:** разработать страницу с отображением всех кораблей игры «Мир Кораблей». Пользователь должен иметь возможность посмотреть на странице основные параметры корабля: название, класс, нация, уровень, описание, изображение и отфильтровать корабли по уровню, нации и классу. В качестве референса можно использовать клиент игры. Внешний вид на ваше усмотрение.
+>
+> Необходимые данные можно получить выполнив GraphQL запрос к API. Запросы должны выполняться с localhost в качестве origin, ввиду ограничений CORS.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Что было сделано
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Загрузка данных с API
+- Просмотр информации о кораблях
+- Диалоговое окно с подробным описанием корабля
+- Виртуальный скроллинг для повышения производительности
+- Выпадающие списки с фильтрами
+- Кнопка сброса фильтра
+- В запрос кораблей было добавлено поле `id` для использования в качестве ключа элемента в списке
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Какие инструменты были использованы
 
-## Learn More
+- TypeScript
+- Next.js для упрощения обхода ограничения CORS (запрос отправляется с сервера Vercel)
+- React Context для хранения состояния
+- Radix UI для компонентов
+- Tailwind CSS для стилей
+- Fetch API для запросов
 
-To learn more about Next.js, take a look at the following resources:
+## Что можно улучшить
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- На реальном проекте лучше использовать:
+  - полноценный менеджер состояния, например MobX
+  - Apollo для запросов к GraphQL-серверу
+- Обработка ошибок
+- Тесты
